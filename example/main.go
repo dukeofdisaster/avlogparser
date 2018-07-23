@@ -10,7 +10,10 @@ import (
 )
 
 func main() {
-	// (1) All or some of the following
+	// take a user specified file from command line and open it
+	// ~$ go run main.go my-logfile.log
+	//
+
 	r, err := os.Open(os.Args[1])
 	rawformatter.CheckError("Can't write to file", err)
 	defer r.Close()
@@ -43,5 +46,4 @@ func main() {
 	for i := range myLogs {
 		writer.Write(rawformatter.ExtractAll(myLogs[i]))
 	}
-
 }

@@ -1,11 +1,11 @@
-package rawformatter
+package avlogparser
 
 import (
 	"log"
 	"strings"
 )
 
-// Names : array of fixed log fields; can be changed
+// Names : array of fixed log names
 var Names = []string{
 	"timestamp",
 	"dest_ip",
@@ -17,9 +17,9 @@ var Names = []string{
 	"payload",
 }
 
-// ValueExtract takes given string and a given key then extracts the value
-// from the given string based on predictable log structure and formatting.
-// func names must be capitalized to be exportable (i.e. so we can import them in main programs)
+// ValueExtract : takes given string and a given key then extracts the value of the key.
+// Functionality is dependent on the format of the log.
+// DOD NOTE: Name convention and comment style required.
 func ValueExtract(myString string, key string) string {
 	keyLength := len(key)
 	keyStart := strings.Index(myString, key)
@@ -54,11 +54,8 @@ func ExtractAll(myString string) []string {
 }
 
 // CheckError : determines if the given error is nil and emits a given message
-// file manipulation operations and
 func CheckError(message string, err error) {
 	if err != nil {
 		log.Fatal(message, err)
 	}
 }
-
-// Uncomment for testing
